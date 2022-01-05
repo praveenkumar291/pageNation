@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { buyLaptop, buyMobile } from "../redux/actions";
+import { buyLaptop, buyMobile, fetchUsers } from "../redux/actions";
 import './style.css';
 
   class Shop extends Component {
@@ -26,6 +26,11 @@ import './style.css';
           <p> avilable :{this.props.numberOfMobiles}</p>
           <button onClick={this.props.buyMobile}>click</button>
         </div>
+        <div className="items">
+          <p>getUser data</p>
+          <p> count :{this.props.users}</p>
+          <button onClick={this.props.fetchUsers}>call Api</button>
+        </div>
       </div>
     );
   }
@@ -34,6 +39,7 @@ const mapStateToProps = (state) => {
   return {
     numberOfLaptops: state.laptops.numberOfLaptops,
     numberOfMobiles: state.mobiles.numberOfMobiles,
+    users: state.users.users
 
   }
 }
@@ -41,6 +47,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     buyLaptop: () => dispatch(buyLaptop()),
     buyMobile: () => dispatch(buyMobile()),
-  }
+    fetchUsers:()=> dispatch(fetchUsers()),
+  };
 }
 export default connect( mapStateToProps,mapDispatchToProps)(Shop)
